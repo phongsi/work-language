@@ -104,14 +104,19 @@ const Dictaphone = () => {
   const selectedRoleObject = roles.find((role) => role.name === selectedRole);
 
   return (
-    <div className="p-4">
-      <div>
-        <label htmlFor="roleSelect">Choose a role:</label>
+    <div className="p-6 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-lg shadow-lg">
+      <div className="text-white mb-4">
+        <label
+          htmlFor="roleSelect"
+          className="block text-lg font-semibold mb-2"
+        >
+          Choose a role:
+        </label>
         <select
           id="roleSelect"
           onChange={handleRoleChange}
           value={selectedRole}
-          className="bg-black text-white p-2"
+          className="bg-black text-white p-3 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-indigo-300"
         >
           <option value="">Select a role</option>
           {roles.map((role, index) => (
@@ -123,13 +128,18 @@ const Dictaphone = () => {
       </div>
 
       {selectedRole && selectedRoleObject && (
-        <div>
-          <label htmlFor="scenarioSelect">Choose a scenario:</label>
+        <div className="text-white mb-4">
+          <label
+            htmlFor="scenarioSelect"
+            className="block text-lg font-semibold mb-2"
+          >
+            Choose a scenario:
+          </label>
           <select
             id="scenarioSelect"
             onChange={handleScenarioChange}
             value={selectedScenario}
-            className="bg-black text-white p-2"
+            className="bg-black text-white p-3 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-indigo-300"
           >
             <option value="">Select a scenario</option>
             {selectedRoleObject.scenarios.map((scenario, index) => (
@@ -141,49 +151,51 @@ const Dictaphone = () => {
         </div>
       )}
 
-      <p>Microphone: {listening ? "on" : "off"}</p>
-      <div className="flex items-center space-x-2">
+      <p className="text-white mb-4">Microphone: {listening ? "on" : "off"}</p>
+
+      <div className="flex items-center space-x-4 mb-6">
         <button
           onClick={SpeechRecognition.startListening}
-          className="bg-green-500 text-white px-4 py-2"
+          className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg transition-colors duration-300"
         >
           Start
         </button>
         <button
           onClick={SpeechRecognition.stopListening}
-          className="bg-red-500 text-white px-4 py-2"
+          className="bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-lg transition-colors duration-300"
         >
           Stop
         </button>
         <button
           onClick={resetTranscript}
-          className="bg-yellow-500 text-white px-4 py-2"
+          className="bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-3 rounded-lg transition-colors duration-300"
         >
           Reset
         </button>
       </div>
-      <p>Spoken Text: {transcript}</p>
+
+      <p className="text-white mb-4">Spoken Text: {transcript}</p>
 
       <button
         onClick={getChatResponse}
-        className="bg-blue-500 text-white px-4 py-2 mt-4"
+        className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg mt-4 transition-colors duration-300"
       >
         Get Chat Response
       </button>
 
-      <div className="border p-2 mt-4">
-        <p>
-          <strong>Conversation History:</strong>
-        </p>
+      <div className="border-t-2 border-white mt-6 pt-4">
+        <p className="text-white font-semibold">Conversation History:</p>
         <div>
           {conversationHistory.map((message, index) => (
             <div
               key={index}
-              className={
-                message.role === "ai" ? "text-blue-500" : "text-gray-800"
-              }
+              className={`${
+                message.role === "ai" ? "text-blue-300" : "text-gray-100"
+              } mb-2`}
             >
-              <strong>{message.role === "ai" ? "AI" : "User"}:</strong>{" "}
+              <strong className="font-semibold">
+                {message.role === "ai" ? "AI" : "User"}:
+              </strong>{" "}
               {message.content}
             </div>
           ))}
@@ -195,9 +207,6 @@ const Dictaphone = () => {
           text={conversationHistory[conversationHistory.length - 1].content}
         />
       )}
-
-      {/* Optional: Use a predefined greeting */}
-      <TextToSpeech text={"Hello, how are you?"} />
     </div>
   );
 };

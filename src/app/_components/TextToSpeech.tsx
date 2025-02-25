@@ -1,24 +1,55 @@
-import React, { useEffect } from "react";
-import { useSpeech } from "react-text-to-speech";
+import React, { useState, useEffect } from "react";
 
-export default function TextToSpeech({ text }) {
-  const {
-    Text, // Component that renders the processed text
-    speechStatus, // Current speech status
-    isInQueue, // Indicates if the speech is active or queued
-    start, // Starts or queues the speech
-    pause, // Pauses the speech
-    stop, // Stops or removes the speech from the queue
-  } = useSpeech({ text: text });
-  console.log(text);
+const TextToSpeech = ({ text }) => {
+  const [isPaused, setIsPaused] = useState(false);
+  const [utterance, setUtterance] = useState(null);
 
   useEffect(() => {
-    start();
+    const synth = window.speechSynthesis;
+    const u = new SpeechSynthesisUtterance(text);
+
+    setUtterance(u);
+
+    return () => {
+      synth.cancel();
+    };
   }, [text]);
 
+  const handlePlay = () => {
+    const synth = window.speechSynthesis;
+
+    if (isPaused) {
+      synth.resume();
+    }
+
+    synth.speak(utterance);
+
+    setIsPaused(false);
+  };
+
+  const handlePause = () => {
+    const synth = window.speechSynthesis;
+
+    synth.pause();
+
+    setIsPaused(true);
+  };
+
+  const handleStop = () => {
+    const synth = window.speechSynthesis;
+
+    synth.cancel();
+
+    setIsPaused(false);
+  };
+
   return (
-    <div
-      style={{ display: "flex", flexDirection: "column", rowGap: "1rem" }}
-    ></div>
+    <div>
+      <button onClick={handlePlay}>{isPaused ? "Resume" : "Play"}</button>
+      <button onClick={handlePause}>Pause</button>
+      <button onClick={handleStop}>Stop</button>
+    </div>
   );
-}
+};
+
+export default TextToSpeech;
