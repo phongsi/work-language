@@ -10,6 +10,10 @@ const TextToSpeech = ({ text }) => {
 
     setUtterance(u);
 
+    // Speak immediately when text changes
+    synth.cancel(); // Cancel any ongoing speech
+    synth.speak(u);
+
     return () => {
       synth.cancel();
     };
@@ -20,9 +24,9 @@ const TextToSpeech = ({ text }) => {
 
     if (isPaused) {
       synth.resume();
+    } else {
+      synth.speak(utterance);
     }
-
-    synth.speak(utterance);
 
     setIsPaused(false);
   };

@@ -56,8 +56,7 @@ const Dictaphone = () => {
   };
 
   const getChatResponse = async () => {
-    const userMessage =
-      transcript || "Hello, can you assist me with my booking?";
+    const userMessage = transcript;
 
     // Update the conversation history with the user message
     setConversationHistory((prevHistory) => [
@@ -151,8 +150,6 @@ const Dictaphone = () => {
         </div>
       )}
 
-      <p className="text-white mb-4">Microphone: {listening ? "on" : "off"}</p>
-
       <div className="flex items-center space-x-4 mb-6">
         <button
           onClick={SpeechRecognition.startListening}
@@ -161,27 +158,25 @@ const Dictaphone = () => {
           Start
         </button>
         <button
-          onClick={SpeechRecognition.stopListening}
+          onClick={() => {
+            SpeechRecognition.stopListening;
+            getChatResponse();
+          }}
           className="bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-lg transition-colors duration-300"
         >
           Stop
         </button>
-        <button
-          onClick={resetTranscript}
-          className="bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-3 rounded-lg transition-colors duration-300"
-        >
-          Reset
-        </button>
+
+        <div className="text-white">
+          <span
+            className={`w-4 h-4 rounded-full inline-block ${listening ? "bg-green-500 animate-pulse" : "bg-red-500"}`}
+          />
+        </div>
       </div>
 
-      <p className="text-white mb-4">Spoken Text: {transcript}</p>
-
-      <button
-        onClick={getChatResponse}
-        className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg mt-4 transition-colors duration-300"
-      >
-        Get Chat Response
-      </button>
+      <p className="text-white mb-4 w-full text-center text-4xl">
+        {transcript}
+      </p>
 
       <div className="border-t-2 border-white mt-6 pt-4">
         <p className="text-white font-semibold">Conversation History:</p>
@@ -194,7 +189,7 @@ const Dictaphone = () => {
               } mb-2`}
             >
               <strong className="font-semibold">
-                {message.role === "ai" ? "AI" : "User"}:
+                {message.role === "ai" ? "Customer" : "User"}:
               </strong>{" "}
               {message.content}
             </div>
