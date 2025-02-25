@@ -10,6 +10,7 @@ export default function TextToSpeech({ text }) {
     pause, // Pauses the speech
     stop, // Stops or removes the speech from the queue
   } = useSpeech({ text: text });
+  console.log(text);
 
   useEffect(() => {
     start();

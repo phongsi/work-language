@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "eslint": "^9.21.0",
+    "eslint-config-next": "^15.1.7",
     "next": "15.1.7",
     "openai": "^4.85.4",
     "react": "^19.0.0",

@@ -9,11 +9,11 @@ export async function POST(req) {
   try {
     const { messages } = await req.json();
     const stream = await client.chat.completions.create({
-      model: "deepseek-ai/DeepSeek-R1",
+      model: "NousResearch/Hermes-3-Llama-3.1-8B",
       stream: true,
       messages,
       temperature: 0.7,
-      max_tokens: 256,
+      max_tokens: 2000,
       top_p: 0.1,
       frequency_penalty: 0,
       presence_penalty: 0,
