@@ -34,3 +34,34 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+
+
+### Sample workflow for mock
+pick an industry -> pick a role -> confirmation -> day1
+
+we will pick hotel and front desk.
+
+Confirm that the user will be a new employee at
+InterHotel Denver at the front desk and concierge.
+
+Ursula is the Front Desk manager and your supervisor.
+Sandy is an accountant at the back office.
+Natasha is the food and beverage manager.
+Julia is the housekeeping manager.
+Brian is maintenance.
+
+Start.
+Day 1. manager welcomes you and confirms if you're ready to see guests.
+
+simulate a guest coming in and asking for single bedrooms.
+
+give prompts for available rooms and features.
+
+simulate a guest choosing, if the guest confirms then ask about pricing.
+
+give prompts for pricing.
+
+simulate the guest agreeing and prompt for payment details.
+
+
